@@ -1,7 +1,9 @@
-import { parseEther, Wallet } from "ethers";
+import { formatEther, parseEther, Wallet } from "ethers";
 import { AgniSwap } from "./agni/swap";
 import { env } from "./configs";
-import { L2_PROVIDER, WRAPPED_NATIVE } from "./constants";
+import { L2_PROVIDER, METH_ADDRESS, PROVIDER, WRAPPED_NATIVE } from "./constants";
+import { METHStaking } from "./meth/stake";
+import { ERC20__factory } from "./contracts";
 
 async function swapBaseIn() {
 
@@ -33,4 +35,19 @@ async function swapBaseOut() {
     );
 }
 
-swapBaseOut();
+async function stake() {
+    const pk = env.keys.pk;
+    const wallet = new Wallet(pk, PROVIDER);
+    const amount = parseEther('0.101');
+    await METHStaking.stake(wallet, amount, 0n);
+}
+
+async function main() {
+    const pk = env.keys.pk;
+    const wallet = new Wallet(pk, PROVIDER);
+    const meth = ERC20__factory.connect(METH_ADDRESS, PROVIDER);
+    const balance = await meth.balanceOf(wallet.address);
+    console.log(formatEther(balance));
+}
+
+main();
