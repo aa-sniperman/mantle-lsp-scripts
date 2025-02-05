@@ -14,5 +14,7 @@ export type { SwapRouter } from "./agni/SwapRouter";
 export { SwapRouter__factory } from "./factories/agni/SwapRouter__factory";
 export type { ERC20 } from "./common/ERC20";
 export { ERC20__factory } from "./factories/common/ERC20__factory";
+export type { RestakingTeller } from "./meth/RestakingTeller";
+export { RestakingTeller__factory } from "./factories/meth/RestakingTeller__factory";
 export type { Staking } from "./meth/Staking";
 export { Staking__factory } from "./factories/meth/Staking__factory";

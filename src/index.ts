@@ -1,9 +1,10 @@
 import { formatEther, parseEther, Wallet } from "ethers";
 import { AgniSwap } from "./agni/swap";
 import { env } from "./configs";
-import { L2_PROVIDER, METH_ADDRESS, PROVIDER, WRAPPED_NATIVE } from "./constants";
+import { CMETH_ADDRESS, L2_PROVIDER, METH_ADDRESS, PROVIDER, WRAPPED_NATIVE } from "./constants";
 import { METHStaking } from "./meth/stake";
 import { ERC20__factory } from "./contracts";
+import { METHRestaking } from "./meth/restake";
 
 async function swapBaseIn() {
 
@@ -42,12 +43,22 @@ async function stake() {
     await METHStaking.stake(wallet, amount, 0n);
 }
 
+async function restake() {
+    const pk = env.keys.pk;
+    const wallet = new Wallet(pk, PROVIDER);
+    
+    await METHRestaking.restakeMETH(wallet, parseEther('0.1'), 0n);
+}
+
 async function main() {
     const pk = env.keys.pk;
     const wallet = new Wallet(pk, PROVIDER);
     const meth = ERC20__factory.connect(METH_ADDRESS, PROVIDER);
-    const balance = await meth.balanceOf(wallet.address);
-    console.log(formatEther(balance));
+    const cmeth = ERC20__factory.connect(CMETH_ADDRESS, PROVIDER);
+    const mBal = await meth.balanceOf(wallet.address);
+    console.log('METH bal: ', formatEther(mBal));
+    const cmBal = await cmeth.balanceOf(wallet.address);
+    console.log('CMETH bal: ', formatEther(cmBal));
 }
 
 main();
