@@ -2,5 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as agni from "./agni";
+export * as bridge from "./bridge";
 export * as common from "./common";
 export * as meth from "./meth";

@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as agni from "./agni";
 export type { agni };
+import type * as bridge from "./bridge";
+export type { bridge };
 import type * as common from "./common";
 export type { common };
 import type * as meth from "./meth";
@@ -12,6 +14,8 @@ export type { QuoterV2 } from "./agni/QuoterV2";
 export { QuoterV2__factory } from "./factories/agni/QuoterV2__factory";
 export type { SwapRouter } from "./agni/SwapRouter";
 export { SwapRouter__factory } from "./factories/agni/SwapRouter__factory";
+export type { L1cmETHAdapter } from "./bridge/L1cmETHAdapter";
+export { L1cmETHAdapter__factory } from "./factories/bridge/L1cmETHAdapter__factory";
 export type { ERC20 } from "./common/ERC20";
 export { ERC20__factory } from "./factories/common/ERC20__factory";
 export type { RestakingTeller } from "./meth/RestakingTeller";
